@@ -1,37 +1,42 @@
 function split(wholeArray) {
-  let half1 = [];
-  let half2 = [];
-  let middlePoint = 0;
-  middlePoint = Math.floor(wholeArray.length / 2);
-  half1 = wholeArray.slice(0, middlePoint);
-  half2 = wholeArray.slice(middlePoint);
-  return [half1, half2];
+let middleIndex = parseInt(wholeArray.length / 2)
+let firstHalf = wholeArray.slice(0,middleIndex)
+let secondHalf = wholeArray.slice(middleIndex)
+
+
+  return [firstHalf, secondHalf];
 }
 
-function merge(arr, arr2) {
-  let sortedArray = [];
-  while (arr.length > 0 || arr2.length > 0) {
-    if (arr.length === 0) {
-      return sortedArray.concat(arr2);
-    }
-    if (arr2.length === 0) {
-      return sortedArray.concat(arr);
-    }
-    if (arr[0] < arr2[0]) {
-      sortedArray.push(arr.shift());
+const merge = (arr1,arr2) => {
+let newArr = [];
+  while(arr1.length !==0 && arr2.length !== 0){
+    if(arr1[0] > arr2[0]){
+      newArr.push(arr2[0])
+      arr2.shift()
     } else {
-      sortedArray.push(arr2.shift());
+      newArr.push(arr1[0])
+      arr1.shift()
     }
   }
+  while(arr1.length !==0){
+    newArr.push(arr1[0])
+    arr1.shift()
+  }
+  while(arr2.length !== 0){
+    newArr.push(arr2[0])
+    arr2.shift()
+  }
+  return newArr
 }
 
-function mergeSort(hugeArray) {
-    let splitArr = split(hugeArray)
-    for(let i = 0; i < hugeArray.length; i++){
-    if(splitArr[i].length > 1) {
-        splitArr = splitArr.slice(1).concat(split(splitArr[0]))
-        i = 0 
-    }
-     }
+const mergeSort = (array) => {
+if(array.length === 0 || array.length === 1){
+  return array 
+   } else{
+     let splitArray = split(array)
+     let mergedArray = merge(mergeSort(splitArray[0]), mergeSort(splitArray[1]))
+
+     return mergedArray
+   }
 }
-  
+

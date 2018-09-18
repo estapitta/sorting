@@ -18,6 +18,12 @@ describe('Split Array function', function() {
    
     it('is able to merge two sorted arrays into one sorted array', function(){
       // test the merging algorithm
-      expect( merge(splitArray, sortedArr) ).toEqual( [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] );
+      expect(merge(splitArray, sortedArr) ).toEqual( [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] );
     });
    });
+
+   describe('Merge sort function', function(){
+      it('is able to merge sort an array', function(){
+        expect(mergeSort([8,1,2,5,6,0,2,1])).toEqual([0,1,1,2,2,5,6,8])
+      })
+   })
